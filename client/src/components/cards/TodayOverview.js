@@ -17,16 +17,16 @@ export const TodayOverview = ({theme}) => {
 
                     <div className="dashboard-today-row-right">
                         <p>0</p>
-                        <span>Workout Streak</span>
+                        <span>Exercises Left</span>
                     </div>
 
                 </div>
 
-                <Link to="/training/today">
+                {theme ? <Link to="/training/today">
                     <button className="btn-black-roundend">
                         Open program
                     </button>
-                </Link>
+                </Link> : null}
 
             </div>
 

@@ -1,8 +1,8 @@
 import { Icon } from "@iconify/react";
 
-export const NewExerciseButton = ({func}) => (
+export const NewExerciseButton = ({show, setFormAction, setFormId}) => (
     <div className="add-new-exercise ">
-        <button onClick={func} className="nav-button shadow m-0">
+        <button className="nav-button shadow m-0" onClick={() => {show(true); setFormAction('add'); setFormId('')} }>
             <Icon icon="bi:plus" />
         </button>
     </div>

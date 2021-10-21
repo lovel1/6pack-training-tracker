@@ -1,6 +1,13 @@
 import { Icon } from "@iconify/react";
+import { updateTrainingData } from "../../actions/trainingActions";
 
-export const TodayTrainingCard = ({exercise_name, reps, sets}) => (
+const changeExerciseState = async (id, action) => {
+    const token = JSON.parse(window.localStorage.getItem('loggedUser'))
+    await updateTrainingData(token, id, action)
+}
+
+
+export const TodayTrainingCard = ({exercise_name, reps, sets, completed, id}) => (
     <div className="training-program-element shadow">
         <div>
             <p>{exercise_name}</p>
@@ -12,8 +19,8 @@ export const TodayTrainingCard = ({exercise_name, reps, sets}) => (
                 <Icon icon="bi:question" />
             </button>
 
-            <button className="nav-button">
-                <Icon icon="akar-icons:check" />
+            <button onClick={() => changeExerciseState(id, !completed)} className={completed ? 'nav-button completed-exercise' : 'nav-button'}>
+                <Icon icon="akar-icons:check"/>
             </button>
 
         </div>

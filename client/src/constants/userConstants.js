@@ -1,0 +1,18 @@
+export const USER_LOGIN = 'USER_LOGIN'
+export const USER_LOGIN_FAIL = 'USER_LOGIN_FAIL'
+
+export const USER_REGISTER = 'USER_REGISTER'
+export const USER_REGISTER_FAIL = 'USER_REGISTER_FAIL'
+
+export const USER_LOGOUT = 'USER_LOGOUT'
+
+export const USER_GET_DATA = 'USER_GET_DATA'
+export const USER_GET_DATA_FAIL = 'USER_GET_DATA_FAIL'
+
+export const USER_UPDATE = 'USER_UPDATE'
+export const USER_UPDATE_FAIL = 'USER_UPDATE_FAIL'
+
+export const THEME_EDIT = 'THEME_EDIT'
+
+
+

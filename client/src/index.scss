@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;600&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: 'Urbanist', sans-serif;
@@ -19,6 +23,9 @@ button, input {
   font-family: 'Urbanist', sans-serif;
 }
 
+.submit-btn {
+  margin-bottom: 15px;
+}
 
 input:focus {
   outline: none;
@@ -55,6 +62,10 @@ code {
   background-color: #fff;
   border: none;
   border-radius: 15px;
+  transition: background 300ms;
+  svg {
+    transition: color 300ms;
+  }
 }
 
 .dashboard-congrats {
@@ -74,10 +85,11 @@ code {
 }
 
 .dashboard-today {
-  align-self: center;
   background-color: #fff;
   border-radius: 45px;
   width: 93%;
+  margin-left: auto;
+  margin-right: auto;
   // max-width: 345px;
   max-height: 280px;
   .dashboard-today-wrapper {
@@ -117,7 +129,7 @@ code {
         color: #7E8180;
         span{
             text-align: center;
-            padding: 0px 5px;
+            max-width: 75%;
         }
         p{
           padding: 0;
@@ -162,6 +174,11 @@ code {
 
     }
   }
+}
+
+
+.training-theme-editor {
+  margin-bottom: 20px;
 }
 
 
@@ -238,13 +255,25 @@ code {
   font-size: 1em;
 }
 
-.exercise-input-container {
+.input-container {
   border-radius: 45px;
   background-color: #fff;
   color: #2f2f2f;
+  text-align: center;
   form {
     padding: 45px 45px;
+    span {
+      color: #7E8180;
+      font-weight: 700;
+      font-size: 0.8em;
+      a {
+        color: #7E8180;
+        padding-bottom: 1px;
+        border-bottom: 2px dotted #7E8180
+      }
+    }
   }
+  
 }
 
 .add-new-exercise {
@@ -256,11 +285,11 @@ code {
   }
 }
 
-.exercise-input-row {
+.input-row {
   display: flex;
   width: 100%;
 }
-.exercise-input-row-element {
+.input-row-element {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -322,7 +351,52 @@ code {
   }
 }
 
-//Helpers
+.sign-page {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  min-height: 90vh;
+}
+
+.brand-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  h1 {
+    font-size: 4em;
+    margin: 0;
+  }
+  span {
+    color: #7E8180;
+    font-weight: 600;
+  }
+}
+
+.link {
+  color: #FFFF;
+  border-bottom: 1px dashed #FFFF
+}
+
+.exercise-editor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(12, 12, 12, 0.267);
+}
+.exercise-editor {
+  width: 95%;
+}
+
+//Utils
+
 .shadow {
   box-shadow:
   0 1px 2.7px rgba(0, 0, 0, 0.034),
@@ -341,9 +415,31 @@ code {
   margin: 0!important;
 }
 
+.vert-m-1 {
+  margin: 0px 0px 20px 0px!important;
+}
+
 .bg-svg {
   position: absolute;
   z-index: -1;
+}
+
+.red-close  {
+  color: #db5454!important;
+  height: 22px!important;
+  width: 22px!important;
+}
+
+.completed-exercise {
+  background-color: #5EE35B;
+  svg {
+    color: #FFFF;
+  }
+}
+.incompleted-exercise {
+  svg {
+    color: #5EE35B;
+  }
 }
 
 //Icons
@@ -357,6 +453,64 @@ code {
   height: 16px;
 }
 
+//Animatons
+.fade-bottom-enter {
+  opacity: 0;
+  // transform: translateY(3%);
+}
+.fade-bottom-enter-active {
+  opacity: 1;
+  // transform: translateY(0%);
+  transition: opacity 250ms;
+}
+.fade-bottom-exit {
+  opacity: 1;
+}
+.fade-bottom-exit-active {
+  opacity: 0;
+  transition: opacity 250ms;
+}
+.fade-bottom-appear {
+  opacity: 1;
+}
+.fade-bottom-appear-active {
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+
+.fade-page-enter {
+  opacity: 0;
+  z-index: 1;
+  transform: translateY(3%);
+}
+.fade-page-enter-active {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: opacity 250ms ease-in, transform 250ms;
+}
+.fade-page-exit {
+  opacity: 0;
+}
+
+
+.exercises-transition-enter {
+  opacity: 0;
+  transform: translateY(20%);
+}
+.exercises-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0%);
+  transition: transform 250ms, opacity 250ms;
+}
+.exercises-transition-exit {
+  opacity: 1;
+}
+.exercises-transition-exit-active {
+  opacity: 0;
+  transition: opacity 250ms;
+}
+  
 
 
 

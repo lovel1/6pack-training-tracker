@@ -1,19 +1,19 @@
 import { Icon } from "@iconify/react";
-import React, { useContext } from "react";
+import dayjs from "dayjs";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { EmptyTrainingDayCard } from "../components/cards/emptyTrainingDayCard";
 import { TrainingDayCard } from "../components/cards/trainingDayCard";
-import { UserContext } from "../context/user/userContext";
+import { getUser } from "../services/user";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
 export const TrainingProgram = () => {
-
-    const { user } = useContext(UserContext)
-    const currentProgramData = user
+    const user = useSelector((state) => state.user)
 
     return (
 
-        <>
-
+        <div className="training-program-page">
             <div className="nav">
                 <Link to="/">
                     <button className="nav-button shadow">
@@ -25,16 +25,16 @@ export const TrainingProgram = () => {
             <div className="training-program-container">
                 <h1 className="title">Your training program</h1>
 
-                {currentProgramData.plan.map(planElem => {
-                    if (!planElem.exercises.length) {
-                        return <EmptyTrainingDayCard day={planElem.day}/>
+                {Object.keys(user).length !== 0 ? Object.keys(user.trainingThemes).map(key => {
+                    if (!user.trainingThemes[key]) {
+                        return <EmptyTrainingDayCard day={capitalizeFirstLetter(key)} key={key}/>
                     } else {
-                        return <TrainingDayCard day={planElem.day} theme={planElem.training_theme}/>
+                        return <TrainingDayCard day={capitalizeFirstLetter(key)} theme={user.trainingThemes[key]} key={key}/>
                     }
                     
-                })}
-            </div>
+                }) : null}
 
-        </>
+            </div>
+        </div>
     )
 }

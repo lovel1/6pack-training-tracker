@@ -1,29 +1,33 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/user/userContext";
 import dayjs from 'dayjs'
 import { Icon } from '@iconify/react';
 import {TodayOverview} from '../components/cards/TodayOverview'
 import {DashboardMenuButton} from '../components/buttons/dashboardMenuButton'
+import {getUser} from "../services/user"
+import {getTrainingTheme} from "../services/exercises"
+import { useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
+
+
 
 export const Dashboard = () => {
-
-    const { user, date } = useContext(UserContext)
+    const user = useSelector((state) => state.user)
+    const date = new Date().toISOString()
+    const day = dayjs(date).format('dddd').toLowerCase()
 
     return (
-        <>
+        <div className="dashboard-page">
 
         <div className="nav-dashboard">
-            <Link to="/account">
+            <Link to="/sign_in">
                 <button className="nav-button shadow">
                     <Icon icon="bi:person" />
                 </button>
             </Link>
-            {/* <Link > */}
-                <button className="nav-button shadow">
+                <button onClick={() => logout()} className="nav-button shadow">
                     <Icon icon="fe:logout"/>
                 </button>
-            {/* </Link> */}
         </div>
 
         <div className="dashboard-congrats">
@@ -31,7 +35,7 @@ export const Dashboard = () => {
             <h2>It's {dayjs(date).format('D MMM YYYY, ddd')}</h2>
         </div>
 
-        <TodayOverview theme={user.plan.find(planElem => planElem.day.toLowerCase() === dayjs(date).format('dddd').toLowerCase()).training_theme}/>
+        <TodayOverview theme={user.trainingThemes[day]}/>
 
         <div className="dashboard-menu-row">
             <DashboardMenuButton link={'/training/current_program'} icon={'map:gym'} label={'Program'}/>
@@ -39,6 +43,6 @@ export const Dashboard = () => {
             <DashboardMenuButton link={'/settings'} icon={'carbon:settings'} label={'Settings'}/>
         </div>
 
-        </>
+        </div>
     )
 }
