@@ -1,6 +1,5 @@
 import { Icon } from "@iconify/react";
-import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { NewExerciseButton } from "../components/buttons/newExerciseButton";
 import { EditableExercise } from "../components/cards/editableExercise";
@@ -11,7 +10,6 @@ import { useSelector } from "react-redux";
 import { addExercise, editExercise } from "../actions/exercisesActions";
 import { TrainingThemeEditor } from "../components/forms/trainingThemeEditor";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
-import Fade from "react-reveal/Fade"
 
 export const TrainingDay = () => {
     const { day } = useParams()

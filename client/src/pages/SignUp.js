@@ -1,7 +1,4 @@
-import { useState } from "react"
-import { useHistory } from "react-router"
 import { SignUpForm } from "../components/forms/signUp"
-import { BrandTitle } from "../components/text/brandTitle"
 
 export const SignUp = () => {
 

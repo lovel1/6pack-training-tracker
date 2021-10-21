@@ -4,8 +4,6 @@ import dayjs from 'dayjs'
 import { Icon } from '@iconify/react';
 import {TodayOverview} from '../components/cards/TodayOverview'
 import {DashboardMenuButton} from '../components/buttons/dashboardMenuButton'
-import {getUser} from "../services/user"
-import {getTrainingTheme} from "../services/exercises"
 import { useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 

@@ -1,11 +1,9 @@
 import { Icon } from "@iconify/react";
-import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { EmptyTrainingDayCard } from "../components/cards/emptyTrainingDayCard";
 import { TrainingDayCard } from "../components/cards/trainingDayCard";
-import { getUser } from "../services/user";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
 export const TrainingProgram = () => {
