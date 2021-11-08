@@ -1,6 +1,9 @@
 import app from "./server.js"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+import path from 'path'
+
+const __dirname = path.resolve()
 
 dotenv.config()
 
