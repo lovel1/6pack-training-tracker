@@ -21,6 +21,7 @@ export const Dashboard = () => {
     const day = dayjs(date).format('dddd').toLowerCase()
 
     return (
+
         <div className="dashboard-page">
 
         <div className="nav-dashboard">
@@ -43,8 +44,8 @@ export const Dashboard = () => {
 
         <div className="dashboard-menu-row">
             <DashboardMenuButton link={'/training/current_program'} icon={'map:gym'} label={'Program'}/>
-            <DashboardMenuButton link={'/statistics'} icon={'gridicons:stats-alt-2'} label={'Statistics'}/>
-            <DashboardMenuButton link={'/settings'} icon={'carbon:settings'} label={'Settings'}/>
+            <DashboardMenuButton link={'/'} icon={'gridicons:stats-alt-2'} label={'Statistics'}/>
+            <DashboardMenuButton link={'/'} icon={'carbon:settings'} label={'Settings'}/>
         </div>
 
         </div>
