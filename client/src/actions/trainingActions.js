@@ -2,7 +2,7 @@ import axios from "axios"
 import { TRAINING_ADD_EXERC, TRAINING_GET_DATA, TRAINING_REMOVE_EXERC } from "../constants/trainingsConstants"
 import { store } from "../store"
 
-const baseUrl = 'http://localhost:5000/api'
+const baseUrl = '/api'
 const dispatch = store.dispatch
 
 export const getTrainingData = async (token) => {

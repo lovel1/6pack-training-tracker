@@ -5,7 +5,7 @@ import { USER_GET_DATA, USER_LOGIN, USER_LOGIN_FAIL, USER_LOGOUT, THEME_EDIT } f
 import { TRAINING_GET_DATA } from "../constants/trainingsConstants"
 import { store } from "../store"
 
-const baseUrl = 'http://localhost:5000/api'
+const baseUrl = '/api'
 const dispatch = store.dispatch
 
 export const verifyToken = async (token, func) => {      
