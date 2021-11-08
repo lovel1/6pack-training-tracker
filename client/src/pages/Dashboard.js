@@ -10,8 +10,14 @@ import { logout } from "../actions/userActions";
 
 
 export const Dashboard = () => {
+
+    // Getting 'user'-state from the global store
     const user = useSelector((state) => state.user)
+
+    // Creating new date
     const date = new Date().toISOString()
+
+    // Formatting previously created date into day of a week using dayjs
     const day = dayjs(date).format('dddd').toLowerCase()
 
     return (

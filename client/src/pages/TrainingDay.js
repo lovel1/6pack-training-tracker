@@ -12,20 +12,33 @@ import { TrainingThemeEditor } from "../components/forms/trainingThemeEditor";
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 
 export const TrainingDay = () => {
+    
+    // Assigning URL-parameter to variable
     const { day } = useParams()
+
+    // Getting all needed states from the global store
     const user = useSelector((state) => state.user)
     const exercises = useSelector((state) => state.exercises)
+
+    // Filtering 'exercises'-array to get the data related to a specific day
     const filteredExercises = exercises.filter(exercise => exercise.day === day)
+
+    // States for toggling forms' visibility
     const [editorShow, setEditorShow] = useState(false)
     const [themeEditorShow, setThemeEditorShow] = useState(false)
+
+    // Initializing states for the data related to the exercise adding/editing form
     const [formExerciseName, setFormExerciseName]  = useState('')
     const [formLink, setFormLink]  = useState('')
     const [formReps, setFormReps]  = useState('')
     const [formSets, setFormSets]  = useState('')
     const [formAction, setFormAction]  = useState('')
     const [formId, setFormId] = useState('')
+
+    // Initializing states for the data related to the exercise adding/editing training theme
     const [formTrainingTheme, setFormTrainingTheme] = useState('')
 
+    // This function nullifies values of states related to the exercise adding/editing form
     const clearForm = () => {
         setFormExerciseName('')
         setFormLink('')
@@ -33,6 +46,8 @@ export const TrainingDay = () => {
         setFormSets('')
     }
 
+    // Function for handling exercise editing/adding form's submit
+    // Action depends on the value of 'formAction'-state ('add'/'edit')
     const handleSubmit = async event => {
         event.preventDefault()
         const token = JSON.parse(window.localStorage.getItem('loggedUser'))
@@ -61,9 +76,7 @@ export const TrainingDay = () => {
 
             <div>
                 <h1 className="title">Training plan for {capitalizeFirstLetter(day)}</h1>
-
-                {
-                 (Object.keys(user).length !== 0 && user.trainingThemes[day] === '') || themeEditorShow 
+                {(Object.keys(user).length !== 0 && user.trainingThemes[day] === '') || themeEditorShow 
                  ?  <TrainingThemeEditor show={setThemeEditorShow} theme={formTrainingTheme} setTheme={setFormTrainingTheme} day={day}/> 
                  :  <div className="training-program-element reversed shadow">
                         <div>

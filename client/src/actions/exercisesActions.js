@@ -1,12 +1,16 @@
 import axios from "axios"
-import { EXERC_ADD, EXERC_DELETE, EXERC_EDIT, THEME_EDIT } from "../constants/exercisesConstants"
+import { EXERC_ADD, EXERC_DELETE, EXERC_EDIT } from "../constants/exercisesConstants"
 import { store } from "../store"
 
 const baseUrl = 'http://localhost:5000/api'
 const dispatch = store.dispatch
 
 export const addExercise = async (token, data) => {
+
+    // Formatting received token into a string starting from 'bearer '
     const newToken = `bearer ${token}`
+
+    // Assigning server response to a variable
     const res = await axios.post(`${baseUrl}/exercises`, data, {
         headers: {
             Authorization: newToken

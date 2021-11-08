@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken"
 
-const decodeToken = (req) => {
+const decodeToken = req => {
+
+    // Receiving 'Authorization'-header from response (it stores auth-token)
     const authorization = req.get('authorization')
 
     if ( authorization && authorization.toLowerCase().startsWith('bearer ') ) {

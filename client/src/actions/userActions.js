@@ -25,8 +25,8 @@ export const verifyToken = async (token, func) => {
 }
 
 export const signUp = async credentials => {
-    const res = await axios.post(`${baseUrl}/users`, credentials)
-    if (res.status === 200) {
+    try {
+        const res = await axios.post(`${baseUrl}/users`, credentials)
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data.token)) 
         const token = JSON.parse(window.localStorage.getItem('loggedUser')) 
         const newToken = `bearer ${token}`
@@ -53,15 +53,15 @@ export const signUp = async credentials => {
             type: TRAINING_GET_DATA,
             payload: resTraining.data
         })
-    } else {
-        console.log('error while signing up')
+        return {success: true}
+    } catch (err) {
+        return {success: false, message: err.response.data.message}
     }
   }
 
 export const login = async credentials => {       
-    const res = await axios.post(`${baseUrl}/auth/login`, credentials)
-
-    if (res.status === 200 && res.data) {
+    try {
+        const res = await axios.post(`${baseUrl}/auth/login`, credentials)
         window.localStorage.setItem('loggedUser', JSON.stringify(res.data.token)) 
         const token = JSON.parse(window.localStorage.getItem('loggedUser')) 
         const newToken = `bearer ${token}`
@@ -88,11 +88,10 @@ export const login = async credentials => {
             type: TRAINING_GET_DATA,
             payload: resTraining.data
         })
-    } else {
-        dispatch({
-            type: USER_LOGIN_FAIL,
-            payload: res.data
-        })
+
+        return {success: true}
+    } catch (err) {
+        return {success: false, message: err.response.data.message}
     }
 }
 

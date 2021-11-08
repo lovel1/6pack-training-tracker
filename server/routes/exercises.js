@@ -10,27 +10,29 @@ const router = express.Router()
 // @desc    Get All Exercises of Current User
 router.route('/all').get((req, res) => {
   const decodedToken = decodeToken(req)
-  if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+  if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
   Exercise.find({'userId': decodedToken.id})
       .then(result => res.status(200).json(result))
+      .catch(err => res.json({success: false, message: 'Unable to get exercises'}))
 })
 
 // @route   GET api/exercises
 // @desc    Get All Exercises of Current User for Specific Day
 router.route('/').get((req, res) => {
     const decodedToken = decodeToken(req)
-    if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+    if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
     Exercise.find({'userId': decodedToken.id, 'day': req.query.day})
         .then(result => res.status(200).json(result))
+        .catch(err => res.json({success: false, message: 'Unable to get exercises'}))
 })
 
 // @route   POST api/exercises
 // @desc    Create New Exercise for Current User
 router.route('/').post(async (req, res) => {
     const decodedToken = decodeToken(req)
-    if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+    if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
     const newExercise = new Exercise({
         userId: decodedToken.id,
@@ -45,7 +47,7 @@ router.route('/').post(async (req, res) => {
       .then(() => {
         res.status(200).json(newExercise._id)
       })
-      .catch((err) => res.json('Unable to add an exercise'))
+      .catch((err) => res.json({success: false, message: 'Unable to add exercise'}))
 })
 
 // @route   GET api/exercises:id
@@ -54,6 +56,7 @@ router.route('/:id').get((req, res) => {
 
   Exercise.findById(req.body.id)
       .then(result => res.json(result))
+      .catch(err => res.json({success: false, message: 'Unable to get exercise'}))
 })
 
 // @route   PUT api/exercises
@@ -70,7 +73,7 @@ router.route('/').put((req, res) => {
       }
     )
     .then(result => res.status(200).json(result))
-    .catch(err => res.status(402))
+    .catch(err => res.status(402).json({success: false, message: 'Error during updating of exercise'}))
 })
 
 // @route   DELETE api/exercises/:id

@@ -6,15 +6,15 @@ const router = express.Router()
 import decodeToken from '../utils/decodeToken.js'
 
 // @route   GET api/users
-// @desc    Get Current User
+// @desc    Get Current User's Data
 router.route('/').get((req, res) => {
   const decodedToken = decodeToken(req)
-  if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+  if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
   const userId = decodedToken.id
     User.findById(userId)
         .then(result => res.status(200).json(result))
-        .catch(err => console.log(err))
+        .catch(err => res.json({success: false, message: 'Unable to find user in the database'}))
 })
 
 // @route   POST api/users
@@ -38,8 +38,7 @@ router.route('/').post(async (req, res) => {
         res.status(200).send({ token, userData: newUser })
       })
       .catch((err) => {
-        console.error('Unable to add user')
-        res.status(500).json('Unable to add user')
+        res.status(500).json({success: false, message: 'Email is already used'})
       })
 })
 
@@ -55,7 +54,7 @@ router.route('/:id').delete((req, res) => {
 // @desc    Get Traning Theme of Specific Day
 router.route('/training_theme').get((req, res) => {
   const decodedToken = decodeToken(req)
-  if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+  if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
   const userId = decodedToken.id
   const trainingThemePath = 'trainingThemes.' + req.query.day
@@ -69,14 +68,14 @@ router.route('/training_theme').get((req, res) => {
 // @desc    Update Traning Theme of Current Day
 router.route('/training_theme').put((req, res) => {
   const decodedToken = decodeToken(req)
-  if (!decodedToken) { return res.status(402).json({error: "invalid token"}) }
+  if (!decodedToken) { return res.status(402).json({success: false, message: "Unable to verify user's token"}) }
 
   const userId = decodedToken.id
   const trainingThemePath = 'trainingThemes.' + req.body.day
 
   User.findByIdAndUpdate(userId, {[trainingThemePath]: req.body.trainingTheme})
       .then(result => res.status(200).json(result))
-      .catch(err => res.status(402).json({success: false}))
+      .catch(err => res.status(402).json({success: false, message: 'Unable to get training theme'}))
 })
 
 

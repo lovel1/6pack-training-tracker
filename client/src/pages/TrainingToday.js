@@ -6,11 +6,19 @@ import { TodayTrainingCard } from "../components/cards/todayTrainingCard";
 import { useSelector } from "react-redux";
 
 export const TrainingToday = () => {
+
+    // Creating new date
     const date = new Date().toISOString()
+
+    // Formatting previously created date into day of a week using dayjs
     const day = dayjs(date).format('dddd')
+
+    // Getting all needed states from the global store
     const user = useSelector((state) => state.user)
     const exercises = useSelector((state) => state.exercises)
     const training = useSelector((state) => state.training)
+
+    // Filtering 'exercises'-array to get the data related to a specific day
     const filteredExercises = exercises.filter(exercise => exercise.day === day.toLowerCase())
 
     return (

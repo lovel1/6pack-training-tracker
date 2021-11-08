@@ -16,12 +16,20 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 function App() {
 
   const location = useLocation()
+
+  // Getting 'user'-state from the global store
   const user = useSelector((state) => state.user)
+
+  // Creating logged-in state
   const [loggedIn, setLoggedIn] = useState(false)
+
+  // Trying to get auth-token from local storage
   const token = JSON.parse(window.localStorage.getItem('loggedUser'))
 
+  // Verifying token. In case if it's verified, logged-in state's value is changed to 'true'
   verifyToken(token, setLoggedIn)
 
+  // Fetching initial data using auth-token. In case if token is missing, no data being loaded
   useEffect(() => {
     setInitData(token)
   }, [])

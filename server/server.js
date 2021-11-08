@@ -8,8 +8,11 @@ import cors from "cors"
 const app = express()
 
 app.use(cors())
-app.use(express.json()) //For reading JSON (instead of body-parser)
 
+// In order to read JSON (instead of body-parser)
+app.use(express.json())
+
+// Applying routes
 app.use("/api/users", users)
 app.use("/api/exercises", exercises)
 app.use("/api/auth", auth)

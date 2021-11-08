@@ -7,6 +7,8 @@ import { TrainingDayCard } from "../components/cards/trainingDayCard";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
 export const TrainingProgram = () => {
+
+    // Getting 'user'-state from the global store
     const user = useSelector((state) => state.user)
 
     return (

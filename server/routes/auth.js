@@ -12,8 +12,12 @@ router.route('/login').post(async (req, res) => {
     ? false 
     : await bcrypt.compare(req.body.password, user.password)
 
-    if (!(user && passwordCorrect)) {
-      return res.status(401).json({error: 'Invalid username or password'})
+    if (!user) {
+      return res.status(401).json({success: false, message: 'Invalid email'})
+    }
+
+    if (!passwordCorrect) {
+      return res.status(401).json({success: false, message: 'Invalid password'})
     }
 
     const userForToken = {
@@ -27,14 +31,13 @@ router.route('/login').post(async (req, res) => {
 });
 
 // @route    POST api/auth/verify
-// @desc     Login
+// @desc     Verification of auth-token
 router.route('/verify').get(async (req, res) => {
   const token = req.get('authorization')
   try {
     const verifiedToken = jwt.verify(token, process.env.SECRET)
     return res.status(200).send()
   } catch (err) {
-    console.log(err)
     return res.status(401).send()
   }
 });
