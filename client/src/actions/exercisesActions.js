@@ -2,7 +2,7 @@ import axios from "axios"
 import { EXERC_ADD, EXERC_DELETE, EXERC_EDIT } from "../constants/exercisesConstants"
 import { store } from "../store"
 
-const baseUrl = 'http://localhost:5000/api'
+const baseUrl = '/api'
 const dispatch = store.dispatch
 
 export const addExercise = async (token, data) => {
