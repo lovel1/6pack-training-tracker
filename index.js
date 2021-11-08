@@ -2,6 +2,7 @@ import app from "./server.js"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import path from 'path'
+import express from "express"
 
 const __dirname = path.resolve()
 
@@ -9,6 +10,8 @@ dotenv.config()
 
 const port = process.env.PORT || 5000
 const db = process.env.DB_6PACK_URI
+
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect(db)
 .then(() => console.log('DB connected'))
