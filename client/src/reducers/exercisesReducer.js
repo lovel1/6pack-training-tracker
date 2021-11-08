@@ -1,12 +1,10 @@
-import { EXERC_ADD, EXERC_CLEAR_SESSION, EXERC_DELETE, EXERC_EDIT, EXERC_GET_DATA, EXERC_GET_DATA_FAIL,  } from "../constants/exercisesConstants"
+import { EXERC_ADD, EXERC_CLEAR_SESSION, EXERC_DELETE, EXERC_EDIT, EXERC_GET_DATA } from "../constants/exercisesConstants"
 
 
 export const exercisesReducer = (state = [], action) => {
     switch (action.type) {
       case EXERC_GET_DATA:
         return action.payload
-      case EXERC_GET_DATA_FAIL:
-        return []
       case EXERC_CLEAR_SESSION:
         return []
       case EXERC_ADD:
